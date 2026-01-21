@@ -47,19 +47,18 @@ export default function AddMember() {
       const token = localStorage.getItem("token");
 
       const API_URL = process.env.REACT_APP_API_URL;
-        await axios.post(
-          `${API_URL}/api/members`,
-          data,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-              'Content-Type': 'multipart/form-data'
-            }
+
+      const response = await axios.post(
+        `${API_URL}/api/members`,
+        data,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'multipart/form-data'
           }
-        );
-
-
-
+        }
+      );
+      
       if (response.status === 201) {
         alert('Member added successfully!');
         navigate('/view-members');
@@ -197,3 +196,4 @@ export default function AddMember() {
   );
 
 }
+
