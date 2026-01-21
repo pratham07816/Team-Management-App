@@ -17,7 +17,7 @@ export default function ViewMembers() {
       try {
         const response = await axios.get(`${API_URL}/api/members`, {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`
+            Authorization: `Bearer ${sessionStorage.getItem("token")}`
           }
         });
 
@@ -53,7 +53,7 @@ export default function ViewMembers() {
       try {
         await axios.delete(`${API_URL}/api/members/${id}`, {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`
+            Authorization: `Bearer ${sessionStorage.getItem("token")}`
           }
         });
         setMembers(members.filter(member => member._id !== id));
@@ -166,5 +166,6 @@ export default function ViewMembers() {
   );
 
 }
+
 
 
