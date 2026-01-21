@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+const API_URL = process.env.REACT_APP_API_URL;
+
 
 export default function ViewMembers() {
   const [members, setMembers] = useState([]);
@@ -13,7 +15,12 @@ export default function ViewMembers() {
   useEffect(() => {
     const fetchMembers = async () => {
       try {
-        const response = await axios.get('http://localhost:3001/api/members');
+        const response = await axios.get(`${API_URL}/api/members`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`
+          }
+        });
+
         setMembers(response.data);
         setFilteredMembers(response.data);
         setError(null);
@@ -25,7 +32,7 @@ export default function ViewMembers() {
     };
 
     fetchMembers();
-  }, []);
+  }, [API_URL]);
 
   useEffect(() => {
     let filtered = members;
@@ -44,7 +51,11 @@ export default function ViewMembers() {
   const handleDelete = async (id) => {
     if (window.confirm('Are you sure you want to delete this member?')) {
       try {
-        await axios.delete(`http://localhost:3001/api/members/${id}`);
+        await axios.delete(`${API_URL}/api/members/${id}`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`
+          }
+        });
         setMembers(members.filter(member => member._id !== id));
       } catch (err) {
         setError('Failed to delete member');
@@ -112,7 +123,13 @@ export default function ViewMembers() {
               <tr key={member._id}>
                 <td className="px-6 py-4 whitespace-nowrap">
                   <img
-                    src={member.profileImage ? `http://localhost:3001/uploads/${member.profileImage}` : '/default-avatar.jpg'}
+                    src={
+                      member.profileImage
+                        ? member.profileImage.startsWith("http")
+                          ? member.profileImage
+                          : `${API_URL}/${member.profileImage}`
+                        : "/default-avatar.jpg"
+                    }
                     alt={member.name}
                     className="w-12 h-12 rounded-full object-cover"
                   />
@@ -147,4 +164,5 @@ export default function ViewMembers() {
       </div>
     </div>
   );
+
 }
