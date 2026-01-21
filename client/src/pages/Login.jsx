@@ -2,6 +2,8 @@ import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { AuthContext } from '../context/AuthContext';
+const API_URL = process.env.REACT_APP_API_URL;
+
 
 const Login = () => {
   const [formData, setFormData] = useState({ email: '', password: '' });
@@ -16,7 +18,11 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('http://localhost:3001/api/auth/login', formData);
+      const res = await axios.post(
+        `${API_URL}/api/auth/login`,
+        formData
+      );
+
       login(res.data.token, res.data.user);
       navigate('/');
     } catch (err) {
@@ -63,5 +69,6 @@ const Login = () => {
     </div>
   );
 };
+
 
 export default Login;
