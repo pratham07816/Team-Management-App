@@ -44,7 +44,7 @@ export default function AddMember() {
         data.append(key, value);
       });
 
-      const token = localStorage.getItem("token");
+      const token = sessionStorage.getItem("token");
 
       const API_URL = process.env.REACT_APP_API_URL;
 
@@ -196,4 +196,5 @@ export default function AddMember() {
   );
 
 }
+
 
