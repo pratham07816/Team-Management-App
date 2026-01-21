@@ -25,7 +25,7 @@ const register = [
       const user = new User({ name, email, password: hashedPassword });
       await user.save();
 
-      const token = jwt.sign({ id: user._id, email: user.email }, process.env.JWT_SECRET, { expiresIn: '1h' });
+      const token = jwt.sign({ id: user._id, email: user.email }, process.env.JWT_SECRET, { expiresIn: '7d' });
       res.status(201).json({ token, user: { id: user._id, name: user.name, email: user.email } });
     } catch (error) {
       res.status(500).json({ message: 'Server error' });
@@ -62,5 +62,6 @@ const login = [
     }
   }
 ];
+
 
 module.exports = { register, login };
