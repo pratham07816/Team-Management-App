@@ -127,7 +127,7 @@ export default function ViewMembers() {
                       member.profileImage
                         ? member.profileImage.startsWith("http")
                           ? member.profileImage
-                          : `${API_URL}/${member.profileImage}`
+                          : `${API_URL}/uploas/${member.profileImage}`
                         : "/default-avatar.jpg"
                     }
                     alt={member.name}
@@ -166,3 +166,4 @@ export default function ViewMembers() {
   );
 
 }
+
