@@ -16,7 +16,7 @@ export default function MemberDetails() {
           `${API_URL}/api/members/${id}`,
           {
             headers: {
-              Authorization: `Bearer ${localStorage.getItem("token")}`,
+              Authorization: `Bearer ${sessionStorage.getItem("token")}`,
             },
           }
         );
@@ -138,5 +138,6 @@ const InfoItem = ({ label, value }) => (
     <span className="text-gray-700 font-medium">{value || "N/A"}</span>
   </div>
 );
+
 
 
