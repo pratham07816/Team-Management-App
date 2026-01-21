@@ -6,6 +6,11 @@ A responsive MERN-stack application to manage student or team member profiles wi
 
 ---
 
+# 🔗 Live Demo: https://team-management-app-xl3r.onrender.com/
+# 🔗 GitHub Repo: https://github.com/pratham07816/Team-Management-App
+
+---
+
 ## 🚀 Features
 
 ### 🔐 Authentication
@@ -156,5 +161,6 @@ A responsive MERN-stack application to manage student or team member profiles wi
 ## 📄 License
 
 This project is licensed under the MIT License.
+
 
 
