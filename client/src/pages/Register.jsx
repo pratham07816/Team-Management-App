@@ -2,6 +2,8 @@ import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { AuthContext } from '../context/AuthContext';
+const API_URL = process.env.REACT_APP_API_URL;
+
 
 const Register = () => {
   const [formData, setFormData] = useState({ name: '', email: '', password: '' });
@@ -16,7 +18,16 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('http://localhost:3001/api/auth/register', formData);
+      if (!API_URL) {
+        setError("API URL not configured");
+        return;
+      }
+  
+      const res = await axios.post(
+        `${API_URL}/api/auth/register`,
+        formData
+      );
+  
       login(res.data.token, res.data.user);
       navigate('/');
     } catch (err) {
@@ -74,5 +85,6 @@ const Register = () => {
     </div>
   );
 };
+
 
 export default Register;
