@@ -127,6 +127,20 @@ A responsive MERN-stack application to manage student or team member profiles wi
 
 ---
 
+## 🔌 API Endpoints
+
+| Method | Endpoint | Description | Auth Required |
+|------|---------|------------|--------------|
+| POST | /api/auth/register | Register new user | ❌ |
+| POST | /api/auth/login | Login user | ❌ |
+| GET | /api/members | Fetch all members | ✅ |
+| GET | /api/members/:id | Get member details | ✅ |
+| POST | /api/members | Add new member | ✅ |
+| PUT | /api/members/:id | Update member | ✅ |
+| DELETE | /api/members/:id | Delete member | ✅ |
+
+---
+
 ## 🔐 Authentication Flow
 
 1. User registers or logs in via `/login` or `/register`
@@ -161,6 +175,7 @@ A responsive MERN-stack application to manage student or team member profiles wi
 ## 📄 License
 
 This project is licensed under the MIT License.
+
 
 
 
