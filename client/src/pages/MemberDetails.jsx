@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+const API_URL = process.env.REACT_APP_API_URL;
 
 export default function MemberDetails() {
   const { id } = useParams();
@@ -12,7 +13,7 @@ export default function MemberDetails() {
     const fetchMember = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3001/api/members/${id}`,
+          `${API_URL}/api/members/${id}`,
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -29,7 +30,7 @@ export default function MemberDetails() {
     };
 
     fetchMember();
-  }, [id]);
+  }, [id, API_URL]);
 
   if (loading) {
     return (
@@ -47,6 +48,12 @@ export default function MemberDetails() {
     );
   }
 
+  const imageUrl = member?.profileImage
+  ? member.profileImage.startsWith("http")
+    ? member.profileImage
+    : `${API_URL}/${member.profileImage}`
+  : "/default-avatar.jpg";
+
   return (
     <div className="max-w-4xl mx-auto p-6">
       <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
@@ -55,15 +62,7 @@ export default function MemberDetails() {
         <div className="bg-gradient-to-r from-blue-500 to-purple-600 p-6">
           <div className="flex items-center space-x-6">
             <img
-              src={
-                member.profileImage
-                  ? member.profileImage.startsWith("http")
-                    ? member.profileImage
-                    : member.profileImage.startsWith("uploads/")
-                      ? `http://localhost:3001/${member.profileImage}`
-                      : `http://localhost:3001/uploads/${member.profileImage}`
-                  : "/default-avatar.jpg"
-              }
+              src={imageUrl}
               alt={member.name}
               className="w-32 h-32 rounded-full border-4 border-white shadow-lg object-cover"
             />
@@ -139,3 +138,4 @@ const InfoItem = ({ label, value }) => (
     <span className="text-gray-700 font-medium">{value || "N/A"}</span>
   </div>
 );
+
