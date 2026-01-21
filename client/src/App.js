@@ -11,8 +11,16 @@ import Login from './pages/Login.jsx';
 import Register from './pages/Register.jsx';
 
 function AppContent() {
-  const { user, logout } = React.useContext(AuthContext);
+  const { user, logout, loading } = React.useContext(AuthContext);
   const navigate = useNavigate();
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <span className="text-gray-600 text-lg">Loading...</span>
+      </div>
+    );
+  }
 
   const handleLogout = () => {
     logout();
@@ -36,8 +44,10 @@ function AppContent() {
           <div className="flex items-center space-x-4">
             {user ? (
               <>
-                <span className="text-white">Welcome, {user.name}</span>
-                <button onClick={handleLogout} className="text-white hover:text-gray-300">Logout</button>
+                <span className="text-white">Welcome, {user?.name}</span>
+                <button onClick={handleLogout} className="text-white hover:text-gray-300">
+                  Logout
+                </button>
               </>
             ) : (
               <>
