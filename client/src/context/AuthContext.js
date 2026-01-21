@@ -8,10 +8,10 @@ export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // ✅ Restore auth on refresh
+  // ✅ Restore auth ONLY for current session
   useEffect(() => {
-    const savedToken = localStorage.getItem("token");
-    const savedUser = localStorage.getItem("user");
+    const savedToken = sessionStorage.getItem("token");
+    const savedUser = sessionStorage.getItem("user");
 
     if (savedToken && savedUser) {
       setToken(savedToken);
@@ -23,8 +23,8 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const login = (token, userData) => {
-    localStorage.setItem("token", token);
-    localStorage.setItem("user", JSON.stringify(userData));
+    sessionStorage.setItem("token", token);
+    sessionStorage.setItem("user", JSON.stringify(userData));
 
     axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
@@ -33,9 +33,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   const logout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
-
+    sessionStorage.clear();
     delete axios.defaults.headers.common["Authorization"];
 
     setToken(null);
