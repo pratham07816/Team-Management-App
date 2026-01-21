@@ -9,11 +9,12 @@ const memberRoutes = require('./routes/members');
 const app = express();
 
 // Connect to MongoDB
-mongoose.connect(process.env.MONGODB_URI || 'mongodb+srv://prathampawar16625:yydOiV9cJ2h8vkzK@cluster0.lthhim5.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0', {
+mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true
-}).then(() => console.log('MongoDB connected'))
-  .catch(err => console.log(err));
+})
+.then(() => console.log('MongoDB connected'))
+.catch(err => console.error(err));
 
 app.use(cors());
 app.use(express.json());
