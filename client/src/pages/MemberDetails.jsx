@@ -51,7 +51,7 @@ export default function MemberDetails() {
   const imageUrl = member?.profileImage
   ? member.profileImage.startsWith("http")
     ? member.profileImage
-    : `${API_URL}/${member.profileImage}`
+    : `${API_URL}/uploads/${member.profileImage}`
   : "/default-avatar.jpg";
 
   return (
@@ -138,4 +138,5 @@ const InfoItem = ({ label, value }) => (
     <span className="text-gray-700 font-medium">{value || "N/A"}</span>
   </div>
 );
+
 
