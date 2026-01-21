@@ -23,7 +23,7 @@ export default function EditMember() {
       try {
         const res = await axios.get(`${API_URL}/api/members/${id}`, {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`
+            Authorization: `Bearer ${sessionStorage.getItem("token")}`
           }
         });
 
@@ -56,7 +56,7 @@ export default function EditMember() {
     e.preventDefault();
 
     try {
-      const token = localStorage.getItem("token");
+      const token = sessionStorage.getItem("token");
 
       await axios.put(
         `${API_URL}/api/members/${id}`,
@@ -191,4 +191,5 @@ export default function EditMember() {
     </div>
   );
 }
+
 
