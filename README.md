@@ -112,21 +112,6 @@ A responsive MERN-stack application to manage student or team member profiles wi
 
 ---
 
-## 🔗 API Endpoints
-
-### Authentication
-- `POST /api/auth/register` - Register a new user
-- `POST /api/auth/login` - Login user
-
-### Members (Protected)
-- `GET /api/members` - Get all members
-- `GET /api/members/:id` - Get member by ID
-- `POST /api/members` - Create new member (with file upload)
-- `PUT /api/members/:id` - Update member
-- `DELETE /api/members/:id` - Delete member
-
----
-
 ## 🔌 API Endpoints
 
 | Method | Endpoint | Description | Auth Required |
@@ -144,7 +129,7 @@ A responsive MERN-stack application to manage student or team member profiles wi
 ## 🔐 Authentication Flow
 
 1. User registers or logs in via `/login` or `/register`
-2. JWT token is stored in localStorage
+2. JWT token is stored in sessionStorage for enhanced security
 3. Token is automatically attached to API requests
 4. Protected routes redirect to login if no token
 5. Logout clears token and redirects to login
@@ -175,6 +160,7 @@ A responsive MERN-stack application to manage student or team member profiles wi
 ## 📄 License
 
 This project is licensed under the MIT License.
+
 
 
 
