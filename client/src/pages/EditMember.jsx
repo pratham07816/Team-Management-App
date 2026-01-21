@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
+const API_URL = process.env.REACT_APP_API_URL;
 
 export default function EditMember() {
   const { id } = useParams();
@@ -20,7 +21,12 @@ export default function EditMember() {
   useEffect(() => {
     const fetchMember = async () => {
       try {
-        const res = await axios.get(`http://localhost:3001/api/members/${id}`);
+        const res = await axios.get(`${API_URL}/api/members/${id}`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`
+          }
+        });
+
         setFormData({
           name: res.data.name,
           registernumber: res.data.registernumber,
@@ -53,7 +59,7 @@ export default function EditMember() {
       const token = localStorage.getItem("token");
 
       await axios.put(
-        `http://localhost:3001/api/members/${id}`,
+        `${API_URL}/api/members/${id}`,
         formData,
         {
           headers: {
@@ -185,3 +191,4 @@ export default function EditMember() {
     </div>
   );
 }
+
